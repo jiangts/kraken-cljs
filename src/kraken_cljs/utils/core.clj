@@ -2,8 +2,8 @@
 
 (defmacro b
   ([f]
-   `(sb.utils.core/benchmark  (fn  [] ~f)))
+   `(kraken-cljs.utils.core/benchmark  (fn  [] ~f)))
 
   ([msg f]
-   `(sb.utils.core/benchmark ~msg  (fn  [] ~f))))
+   `(kraken-cljs.utils.core/benchmark ~msg  (fn  [] ~f))))
 

@@ -1,13 +1,12 @@
 (ns kraken-cljs.core
   (:require [cljs.nodejs :as node]
-            [kraken-cljs.utils.core :as utils :refer [p]])
-  (:require-macros [kraken-cljs.utils.globals :as globals]))
+            [kraken-cljs.utils.core :as utils :refer [p] :include-macros true])
+  (:require-macros [kraken-cljs.utils.nodejs :refer [require*]]))
 
 (enable-console-print!)
 (node/enable-util-print!)
 
-(def express (node/require "express"))
-;(js/require "./hello")
+(require* "express")
 
 (defn say-hello! [req res]
   (-> res (.send "Hello World!")))
