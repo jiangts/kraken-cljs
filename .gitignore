@@ -10,3 +10,4 @@ pom.xml
 .lein-repl-history
 .lein-plugins/
 .cljs_node_repl/
+.nrepl-port
