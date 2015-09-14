@@ -1,56 +1,71 @@
 # kraken-cljs
 
-FIXME: Write a one-line description of your library/project.
+Example configuration of a non-trivial ClojureScript/Node.js interop.
+I have in mind teams that want to seriously use ClojureScript with existing Node.js libraries/ecosystem.
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+I've been using [KrakenJS][kraken] with [BookshelfJS][bookshelf] to write a web app, and sorely missed the functional programming/macros I had when I starting Clojure.
+REST apis, database calls, data validations, model definitions. They're all just so repetitive!
+[kraken]: http://krakenjs.com/
+[bookshelf]: htpp://bookshelfjs.org/
 
-## Setup
+I also sorely missed core.async. 
+While the repetitive Javascript issue could be fixed with better custom tooling (yay, fixing tech debt without working on features, exactly what we want...) or something like SweetJS, this isn't really replaceable in JS land.
+Reasoning through async database calls is really annoying as each async pattern seems to have a different solution.
+Even when you're using promises.
 
-Build your project once in dev mode with the following script and then open `index.html` in your browser.
+Hence, this project. My goal is to have a source directory where both ClojureScript and Javascript code lives.
+You can require js from cljs, and require cljs from js.
 
-    ./scripts/build
+I also want to take advantage of some of Node.js's build ecosystem, in particular, Grunt, which I'm most familiar with.
 
-To auto build your project in dev mode:
+## File Organization
 
-    ./script/watch
+The project is a mies template, with minor modifications for Node.js compatibility.
+Then, I used the Yeoman Kraken generator to make a project, and put it in the `src/kraken_cljs` directory.
+This way, you can run the `lein` and `script` commands in the project root, and `grunt` commands in the mixed js/cljs source root at `src/kraken_cljs`.
 
-To start an auto-building Node REPL (requires
-[rlwrap](http://utopia.knoware.nl/~hlub/uck/rlwrap/), on OS X
-installable via brew):
+The two tricks I used are 
+
+1. all npm dependencies go on the Node.js side (it has better support for js ecosystem obviously) in the js/cljs source root, so node_modules in the cljs project directory are symlinked.
+2. all compiled cljs goes to the `out/` directory in the project root. Here, I've made a super simple `cljs_shim.js` file to load all your good ClojureScript.
+
+## Interop
+
+Calling CLJS from JS:
+
+    require.main.require('./cljs_shim'); # include ClojureScript and Google Closure. Do this once in your app entrypoint.
+
+    goog.require('your.namespace');
+    your.namespace.function();
+
+Calling JS from CLJS:
+
+    (def test (-> js/require .-main (.require './test.js'))) ; this can definitely be made prettier
+    ((-> test .fun)) ; call function called fun
+
+## Dev environment
+
+You obviously get all your grunt stuff in the js/cljs source directory.
+
+The following are commands to give you the nice lisp-y dev experience:
+
+To get a REPL going:
+To start an auto-building Node REPL 
 
     ./scripts/repl
 
-To get source map support in the Node REPL:
+To auto build when a cljs source file changes:
 
-    lein npm install
-    
-To start a browser REPL:
-    
-1. Uncomment the following lines in src/kraken_cljs/core.cljs:
-```clojure
-;; (defonce conn
-;;   (repl/connect "http://localhost:9000/repl"))
-```
-2. Run `./scripts/brepl`
-3. Browse to `http://localhost:9000` (you should see `Hello world!` in the web console)
-4. (back to step 3) you should now see the REPL prompt: `cljs.user=>`
-5. You may now evaluate ClojureScript statements in the browser context.
-    
-For more info using the browser as a REPL environment, see
-[this](https://github.com/clojure/clojurescript/wiki/The-REPL-and-Evaluation-Environments#browser-as-evaluation-environment).
-    
-Clean project specific out:
+    ./script/watch
+    #or
+    lein cljsbuild auto server
+
+Clean project:
 
     lein clean
-     
-Build a single release artifact with the following script and then open `index_release.html` in your browser.
-
-    ./scripts/release
 
 ## License
 
-Copyright © 2015 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+Copyright © Allan Jiang

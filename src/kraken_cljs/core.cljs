@@ -6,7 +6,7 @@
 (enable-console-print!)
 (node/enable-util-print!)
 
-(defn hello [x] (println (str x "\n")))
+(defn hello [x] (println x))
 
 (defn -main []
   (println "Loaded ClojureScript and Google Closure!\n")
