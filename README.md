@@ -38,15 +38,18 @@ The two tricks I used are
 
 Calling CLJS from JS:
 
-    require.main.require('./cljs_shim'); # include ClojureScript and Google Closure. Do this once in your app entrypoint.
+    require('./cljs_shim'); # include ClojureScript and Google Closure. Do this once in your app entrypoint.
 
     goog.require('your.namespace');
     your.namespace.function();
 
 Calling JS from CLJS:
 
-    (def test (-> js/require .-main (.require './test.js'))) ; this can definitely be made prettier
+    (def test (-> js/require .-main (.require './test.js'))) ; this can be made prettier, but I'll leave that to you.
     ((-> test .fun)) ; call function called fun
+
+Read up on [require.main.require](https://gist.github.com/branneman/8048520).
+You don't have to use it, but keep in mind your compiled ClojureScript files will be living quite far away from your JavaScript in the `out/` directory.
 
 ## Dev environment
 
