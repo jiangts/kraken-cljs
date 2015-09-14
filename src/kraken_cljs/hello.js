@@ -1,1 +1,6 @@
-module.exports = function () {console.log("HI I AM A JS FILE");}
+require('./cljs_shim');
+
+goog.require('kraken_cljs.core');
+
+kraken_cljs.core.hello("printing stuff here!\n");
+

@@ -1,0 +1,13 @@
+{
+  "generator-kraken": {
+    "taskModule": "grunt",
+    "description": "clojurescript interop config example for krakenjs",
+    "author": "Allan Jiang",
+    "templateModule": false,
+    "i18n": "i18n",
+    "componentPackager": "bower",
+    "cssModule": "sass",
+    "jsModule": false,
+    "useJson": null
+  }
+}
