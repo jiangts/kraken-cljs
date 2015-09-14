@@ -6,15 +6,26 @@
 (enable-console-print!)
 (node/enable-util-print!)
 
-(require* "express")
+(defn hello [x] (println x))
 
-(defn say-hello! [req res]
-  (-> res (.send "Hello World!")))
+(-> js/require .-main (.require "./silly.js"))
 
 (defn -main []
-  (let [app (express)]
-    (-> app (.get "/" say-hello!))
-    (-> app (.listen 3000 (fn [] (p "Server started on port 3000"))))))
+  (println "Loaded ClojureScript and Google Closure!\n"))
 
 (set! *main-cli-fn* -main)
 
+(comment
+
+  (require* "express")
+
+  (defn say-hello! [req res]
+    (-> res (.send "Hello World!")))
+
+  (defn -main []
+    (let [app (express)]
+      (-> app (.get "/" say-hello!))
+      (-> app (.listen 3000 (fn [] (p "Server started on port 3000"))))))
+
+  (set! *main-cli-fn* -main)
+  )

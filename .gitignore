@@ -1,6 +1,6 @@
 pom.xml
 *jar
-/node_modules/
+node_modules/
 /lib/
 /classes/
 /out/
