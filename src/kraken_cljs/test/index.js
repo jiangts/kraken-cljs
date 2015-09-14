@@ -37,7 +37,7 @@ describe('index', function () {
             .expect(200)
             .expect('Content-Type', /html/)
             
-                .expect(/Hello, /)
+                .expect(/"name": "index"/)
             
             .end(function (err, res) {
                 done(err);

@@ -13,4 +13,4 @@
           :target :nodejs
           :cache-analysis true
           :source-map true
-          :watch-fn #(println "custom watch function")})
+          :watch-fn #(println "\n")})
