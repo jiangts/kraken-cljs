@@ -7,8 +7,10 @@ I have in mind teams that want to seriously use ClojureScript with existing Node
 
 I've been using [KrakenJS][kraken] with [BookshelfJS][bookshelf] to write a web app, and sorely missed the functional programming/macros I had when I starting Clojure.
 REST apis, database calls, data validations, model definitions. They're all just so repetitive!
+
 [kraken]: http://krakenjs.com/
-[bookshelf]: htpp://bookshelfjs.org/
+
+[bookshelf]: http://bookshelfjs.org/
 
 I also sorely missed core.async. 
 While the repetitive Javascript issue could be fixed with better custom tooling (yay, fixing tech debt without working on features, exactly what we want...) or something like SweetJS, this isn't really replaceable in JS land.
@@ -28,8 +30,8 @@ This way, you can run the `lein` and `script` commands in the project root, and 
 
 The two tricks I used are 
 
-1. all npm dependencies go on the Node.js side (it has better support for js ecosystem obviously) in the js/cljs source root, so node_modules in the cljs project directory are symlinked.
-2. all compiled cljs goes to the `out/` directory in the project root. Here, I've made a super simple `cljs_shim.js` file to load all your good ClojureScript.
+1. all npm dependencies go on the Node.js side (it has better support for js ecosystem obviously) in the js/cljs source root, so node_modules in the cljs project directory are symlinked into the project root so ClojureScript can use them.
+2. all compiled cljs goes to the `out/` directory in the project root. Here, I've made a super simple `cljs_shim.js` file to load all your good bits of ClojureScript.
 
 ## Interop
 
@@ -59,7 +61,7 @@ To start an auto-building Node REPL
 To auto build when a cljs source file changes:
 
     ./script/watch
-    #or
+    # or
     lein cljsbuild auto server
 
 Clean project:
