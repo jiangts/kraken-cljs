@@ -1,0 +1,13 @@
+{
+  "generator-kraken": {
+    "taskModule": "grunt",
+    "description": "example krakencljs app config",
+    "author": "Allan Jiang",
+    "templateModule": "dustjs",
+    "i18n": "i18n",
+    "componentPackager": "bower",
+    "cssModule": "sass",
+    "jsModule": false,
+    "useJson": null
+  }
+}

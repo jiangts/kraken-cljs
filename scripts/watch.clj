@@ -12,4 +12,5 @@
           :optimizations :none
           :target :nodejs
           :cache-analysis true
-          :source-map true})
+          :source-map true
+          :watch-fn #(println "custom watch function")})

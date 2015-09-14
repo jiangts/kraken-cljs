@@ -11,8 +11,7 @@
   :profiles  {:dev {:dependencies [[com.cemerick/piggieback "0.2.1"]
                                    [org.clojure/tools.nrepl "0.2.10"]]
                     :repl-options {:nrepl-middleware  [cemerick.piggieback/wrap-cljs-repl]}}}
-  :npm {:dependencies [[source-map-support "0.3.2"]
-                       [express "4.11.1"]]}
+  :npm {:dependencies [[source-map-support "0.3.2"]]}
   :source-paths ["src" "target/classes"]
   :clean-targets ["out" "release"]
   :target-path "target"
@@ -25,3 +24,4 @@
                                    :target :nodejs
                                    :cache-analysis true
                                    :source-map true}}]})
+
